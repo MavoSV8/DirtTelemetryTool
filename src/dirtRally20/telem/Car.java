@@ -1,31 +1,31 @@
 package dirtRally20.telem;
 
 public class Car {
-    private int velocity;
-    private int gear;
-    private int RPMs;
+    private unsigned float velocity;
+    private unsigned float gear;
+    private unsigned float RPMs;
 
-    public void setGear(int gear) {
+    public void setGear(float gear) {
         this.gear = gear;
     }
 
-    public void setRPMs(int RPMs) {
+    public void setRPMs(float RPMs) {
         this.RPMs = RPMs;
     }
 
-    public void setVelocity(int velocity) {
+    public void setVelocity(float velocity) {
         this.velocity = velocity;
     }
 
-    public int getGear() {
+    public float getGear() {
         return gear;
     }
 
-    public int getRPMs() {
+    public float getRPMs() {
         return RPMs;
     }
 
-    public int getVelocity() {
+    public float getVelocity() {
         return velocity;
     }
 }
