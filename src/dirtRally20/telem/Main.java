@@ -5,19 +5,19 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        GetPacketFromGame echo = new GetPacketFromGame();
+        GetPacketFromGame getData = new GetPacketFromGame();
         Scanner input = new Scanner(System.in);
 
         boolean end = true;
 
-        while (end == true)
+        while (end == true) {
 
-            System.out.println(echo.receiveData("Get telemetry"));
-            if(input.nextInt() == 1)
-            {
+            System.out.println(getData.receiveData());
+            if (input.nextInt() == 1) {
                 end = false;
             }
-            echo.close();
+        }
+            getData.close();
 
     }
 }
