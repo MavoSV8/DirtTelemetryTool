@@ -21,9 +21,20 @@ public class Main {
             car.setRPMs(Float.intBitsToFloat(dataBuffer[151] << 24 | (dataBuffer[150] & 0xFF) << 16 | (dataBuffer[149] & 0xFF) << 8 | (dataBuffer[148] & 0xFF)));
             car.setGear(Float.intBitsToFloat(dataBuffer[135] << 24 | (dataBuffer[134] & 0xFF) << 16 | (dataBuffer[133] & 0xFF) << 8 | (dataBuffer[132] & 0xFF)));
             //car.setVelocity(ByteBuffer.wrap(Arrays.copyOfRange(dataBuffer, 28, 32)).getFloat());
-            System.out.print((int)(car.getVelocity()*3.6) + "  ");
-            System.out.print((int)(car.getRPMs()*10) + "    ");
-            System.out.print((int)(car.getGear()) + " ");
+            System.out.print("Velocity: ");
+            System.out.print((int)(car.getVelocity()*3.6) + "km/h  ");
+            System.out.print("RPM: ");
+            System.out.print((int)(car.getRPMs()*10) + "/min    ");
+            System.out.print("Gear: ");
+            if((int)car.getGear() == -1){
+                System.out.print("R ");
+            }
+            else if((int)car.getGear() == 0){
+                System.out.print("N ");
+            }
+            else {
+                System.out.print((int) (car.getGear()) + " ");
+            }
             System.out.print("\r");
             //System.out.flush();
            /* if (input.nextInt() == 1) {
