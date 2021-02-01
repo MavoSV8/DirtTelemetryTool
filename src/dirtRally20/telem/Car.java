@@ -1,9 +1,9 @@
 package dirtRally20.telem;
 
 public class Car {
-    private  float velocity;
-    private  float gear;
-    private  float RPMs;
+    private float velocity;
+    private float gear;
+    private float RPMs;
 
     public void setGear(float gear) {
         this.gear = gear;
