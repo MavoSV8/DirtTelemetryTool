@@ -12,14 +12,35 @@ public class GUI {
     public void createWindow(String title,int width,int height) {
         frame.setTitle(title);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
         frame.setSize(width, height);
         frame.setVisible(true);
-        velocity.setFont(new Font("Serif", Font.PLAIN, 30));
-        RPMs.setFont(new Font("Serif", Font.PLAIN, 30));
-        gear.setFont(new Font("Serif", Font.PLAIN, 30));
-        frame.getContentPane().add(BorderLayout.WEST, velocity);
-        frame.getContentPane().add(BorderLayout.CENTER, RPMs);
-        frame.getContentPane().add(BorderLayout.EAST, gear);
+        frame.getContentPane().setBackground(Color.BLUE);
+        velocity.setFont(new Font("Calibri", Font.PLAIN, 60));
+        RPMs.setFont(new Font("Calibri", Font.PLAIN, 60));
+        gear.setFont(new Font("Calibri", Font.PLAIN, 60));
+
+        velocity.setHorizontalAlignment(JLabel.CENTER);
+        velocity.setVerticalAlignment(JLabel.CENTER);
+        velocity.setBackground(Color.GRAY);
+        velocity.setOpaque(true);
+        velocity.setPreferredSize(new Dimension(100,100));
+
+        RPMs.setHorizontalAlignment(JLabel.CENTER);
+        RPMs.setVerticalAlignment(JLabel.CENTER);
+        RPMs.setBackground(new Color(216,216,216));
+        RPMs.setOpaque(true);
+
+        gear.setHorizontalAlignment(JLabel.CENTER);
+        gear.setVerticalAlignment(JLabel.CENTER);
+        gear.setBackground(Color.WHITE);
+        gear.setOpaque(true);
+        gear.setPreferredSize(new Dimension(100,100));
+
+        frame.getContentPane().add(RPMs,BorderLayout.NORTH);
+        frame.getContentPane().add(gear,BorderLayout.WEST);
+        frame.getContentPane().add(velocity,BorderLayout.CENTER);
+
     }
     public void setVelocity(int v){
         velocity.setText(Integer.toString(v));
@@ -28,9 +49,9 @@ public class GUI {
     }
 
     public void setRPMs(int RPM) {
-        RPMs.setText(" " + RPM);
+        RPMs.setText(Integer.toString(RPM));
         JComponent parent = (JComponent) RPMs.getParent();
-        if(parent !=null) parent.revalidate();
+        if(parent != null) parent.revalidate();
     }
 
     public void setGear(int g) {
