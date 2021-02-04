@@ -4,6 +4,31 @@ public class Car {
     private float velocity;
     private float gear;
     private float RPMs;
+    private float stageTime;
+    private float maxRPM;
+
+
+
+    public float getMaxRPM() {
+        return maxRPM;
+    }
+
+    public void setMaxRPM(float maxRPM) {
+        this.maxRPM = maxRPM;
+    }
+
+
+
+
+    public float getStageTime() {
+        return stageTime;
+    }
+
+    public void setStageTime(float stageTime) {
+        this.stageTime = stageTime;
+    }
+
+
 
     public void setGear(float gear) {
         this.gear = gear;
