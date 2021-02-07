@@ -6,8 +6,33 @@ public class Car {
     private float RPMs;
     private float stageTime;
     private float maxRPM;
+    private float clutch;
+    private float accelerator;
+    private float brake;
 
+    public float getAccelerator() {
+        return accelerator;
+    }
 
+    public void setAccelerator(float accelerator) {
+        this.accelerator = accelerator;
+    }
+
+    public float getBrake() {
+        return brake;
+    }
+
+    public void setBrake(float brake) {
+        this.brake = brake;
+    }
+
+    public float getClutch() {
+        return clutch;
+    }
+
+    public void setClutch(float clutch) {
+        this.clutch = clutch;
+    }
 
     public float getMaxRPM() {
         return maxRPM;
