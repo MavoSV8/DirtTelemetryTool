@@ -1,10 +1,5 @@
 package dirtRally20.telem;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.Scanner;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -12,7 +7,7 @@ public class Main {
         //Scanner input = new Scanner(System.in);
         Car car = new Car();
         GUI gui = new GUI();
-        gui.createWindow("Telemetry tool",600,350);
+        gui.createWindow("Telemetry tool",700,400);
         gui.setDefaults();
         boolean end = true;
         int i = 0;
@@ -33,7 +28,7 @@ public class Main {
             car.setBrake(Float.intBitsToFloat(dataBuffer[127] << 24 | (dataBuffer[126] & 0xFF) << 16 | (dataBuffer[125] & 0xFF) << 8 | (dataBuffer[124] & 0xFF)));
 
             gui.setClutchBar(car.getClutch());
-            gui.setAcceleratorBar(car.getAccelerator());
+            gui.setThrottleBar(car.getAccelerator());
             gui.setBrakeBar(car.getBrake());
             gui.setVelocity((int)(car.getVelocity()*3.6));
             gui.setRPMs((int)(car.getMaxRPM()*10),(int)(car.getRPMs()*10));
