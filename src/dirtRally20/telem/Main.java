@@ -52,7 +52,7 @@ public class Main {
             gui.setStageTime(car.getStageTime());
             gui.setBrakeTemperature((int)car.getBrakeFL(),(int)car.getBrakeFR(),(int)car.getBrakeRL(),(int)car.getBrakeRR());
             gui.setSuspensionPosition((int)car.getSuspensionFL(),(int)car.getSuspensionFR(),(int)car.getSuspensionRL(),(int)car.getSuspensionRR());
-            gui.setTireVelo((int)car.getTiresFL(),(int)car.getTiresFR(),(int)car.getTiresRL(),(int)car.getTiresRR());
+            gui.setTireVelo((int)(car.getTiresFL()*3.6),(int)(car.getTiresFR()*3.6),(int)(car.getTiresRL()*3.6),(int)(car.getTiresRR()*3.6));
            /* if (input.nextInt() == 1) {
                 end = false;
             }*/
