@@ -10,6 +10,122 @@ public class Car {
     private float accelerator;
     private float brake;
 
+    private float suspensionFL;
+    private float suspensionFR;
+    private float suspensionRL;
+    private float suspensionRR;
+
+    private float brakeFL;
+    private float brakeFR;
+    private float brakeRL;
+    private float brakeRR;
+
+    private float tiresFL;
+    private float tiresFR;
+    private float tiresRL;
+
+    public float getSuspensionFL() {
+        return suspensionFL;
+    }
+
+    public void setSuspensionFL(float suspensionFL) {
+        this.suspensionFL = suspensionFL;
+    }
+
+    public float getSuspensionFR() {
+        return suspensionFR;
+    }
+
+    public void setSuspensionFR(float suspensionFR) {
+        this.suspensionFR = suspensionFR;
+    }
+
+    public float getSuspensionRL() {
+        return suspensionRL;
+    }
+
+    public void setSuspensionRL(float suspensionRL) {
+        this.suspensionRL = suspensionRL;
+    }
+
+    public float getSuspensionRR() {
+        return suspensionRR;
+    }
+
+    public void setSuspensionRR(float suspensionRR) {
+        this.suspensionRR = suspensionRR;
+    }
+
+    public float getBrakeFL() {
+        return brakeFL;
+    }
+
+    public void setBrakeFL(float brakeFL) {
+        this.brakeFL = brakeFL;
+    }
+
+    public float getBrakeFR() {
+        return brakeFR;
+    }
+
+    public void setBrakeFR(float brakeFR) {
+        this.brakeFR = brakeFR;
+    }
+
+    public float getBrakeRL() {
+        return brakeRL;
+    }
+
+    public void setBrakeRL(float brakeRL) {
+        this.brakeRL = brakeRL;
+    }
+
+    public float getBrakeRR() {
+        return brakeRR;
+    }
+
+    public void setBrakeRR(float brakeRR) {
+        this.brakeRR = brakeRR;
+    }
+
+    public float getTiresFL() {
+        return tiresFL;
+    }
+
+    public void setTiresFL(float tiresFL) {
+        this.tiresFL = tiresFL;
+    }
+
+    public float getTiresFR() {
+        return tiresFR;
+    }
+
+    public void setTiresFR(float tiresFR) {
+        this.tiresFR = tiresFR;
+    }
+
+    public float getTiresRL() {
+        return tiresRL;
+    }
+
+    public void setTiresRL(float tiresRL) {
+        this.tiresRL = tiresRL;
+    }
+
+    public float getTiresRR() {
+        return tiresRR;
+    }
+
+    public void setTiresRR(float tiresRR) {
+        this.tiresRR = tiresRR;
+    }
+
+    private float tiresRR;
+
+
+
+
+
     public float getAccelerator() {
         return accelerator;
     }

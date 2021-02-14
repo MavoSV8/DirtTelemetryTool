@@ -92,21 +92,47 @@ public class GUI {
     private JLabel RPMs = new JLabel();
     private JLabel gear = new JLabel();
     private JLabel stageTime = new JLabel();
-
     private JLabel clutch = new JLabel();
     private JLabel brake = new JLabel();
     private JLabel throttle = new JLabel();
+
+    private JLabel tireFR = new JLabel();
+    private JLabel tireFL = new JLabel();
+    private JLabel tireRR = new JLabel();
+    private JLabel tireRL = new JLabel();
+
+    private JLabel brakeFR = new JLabel();
+    private JLabel brakeFL = new JLabel();
+    private JLabel brakeRR = new JLabel();
+    private JLabel brakeRL = new JLabel();
+
+    private JLabel suspensionFR = new JLabel();
+    private JLabel suspensionFL = new JLabel();
+    private JLabel suspensionRR = new JLabel();
+    private JLabel suspensionRL = new JLabel();
+
+    private JLabel lateralG = new JLabel();
+    private JLabel longitudinalG = new JLabel();
 
     private JPanel EASTpanel = new JPanel();
     private JPanel CENTERpanel = new JPanel();
     //private JPanel NORTHpanel = new JPanel();
     private JPanel WESTpanel = new JPanel();
     private JPanel SOUTHpanel = new JPanel();
+    private JPanel gearPanel = new JPanel();
+    private JPanel gForce = new JPanel();
+    private JPanel suspensionPosition = new JPanel();
+    private JPanel tireVelo = new JPanel();
+    private JPanel brakeTemperature = new JPanel();
 
     private JProgressBar RPMsBar = new JProgressBar();
     private JProgressBar clutchBar = new JProgressBar(SwingConstants.VERTICAL);
     private JProgressBar brakeBar = new JProgressBar(SwingConstants.VERTICAL);
     private JProgressBar throttleBar = new JProgressBar(SwingConstants.VERTICAL);
+    private JProgressBar suspFL = new JProgressBar(SwingConstants.VERTICAL);
+    private JProgressBar suspFR = new JProgressBar(SwingConstants.VERTICAL);
+    private JProgressBar suspRL = new JProgressBar(SwingConstants.VERTICAL);
+    private JProgressBar suspRR = new JProgressBar(SwingConstants.VERTICAL);
 
     private int minute = 0;
     private float seconds = 0;
@@ -115,36 +141,47 @@ public class GUI {
         setupClutch();
         setupBrake();
         setupThrottle();
+        EASTpanel.setPreferredSize(new Dimension(101, 300));
         EASTpanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
+        //add clutchbar to panel
         gbc.gridx = 0;
         gbc.gridy = 0;
         EASTpanel.add(clutchBar, gbc);
-
+        //add brakebar to panel
         gbc.gridx = 1;
         gbc.gridy = 0;
         EASTpanel.add(brakeBar, gbc);
-
+        //add throttlebar to panel
         gbc.gridx = 2;
         gbc.gridy = 0;
         EASTpanel.add(throttleBar, gbc);
-
+        //add clutch label to panel
         gbc.gridx = 0;
         gbc.gridy = 1;
         EASTpanel.add(clutch, gbc);
-
+        //add brake label to panel
         gbc.gridx = 1;
         gbc.gridy = 1;
         EASTpanel.add(brake, gbc);
-
+        //add throttle label to panel
         gbc.gridx = 2;
         gbc.gridy = 1;
         EASTpanel.add(throttle, gbc);
-        EASTpanel.setPreferredSize(new Dimension(100, 100));
+        EASTpanel.setBorder(BorderFactory.createLineBorder(Color.black));
     }
 
     public void setWEST() {
-        setupGear();
+        WESTpanel.setPreferredSize(new Dimension(100, 300));
+        WESTpanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        WESTpanel.add(suspensionPosition, gbc);
+        WESTpanel.setBorder(BorderFactory.createLineBorder(Color.black));
     }
 
     public void setNORTH() {
@@ -157,7 +194,37 @@ public class GUI {
     }
 
     public void setCENTER() {
+        setupGForce();
+        setupTireVelo();
+        setupBrakeTemperature();
         setupVelocity();
+        setupGear();
+        setupSuspension();
+        CENTERpanel.setPreferredSize(new Dimension(400, 300));
+        CENTERpanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        CENTERpanel.add(gForce, gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        CENTERpanel.add(velocity, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridheight = 2;
+        //gbc.fill = GridBagConstraints.VERTICAL;
+        CENTERpanel.add(gearPanel, gbc);
+        gbc.gridheight = 1;
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        CENTERpanel.add(tireVelo, gbc);
+        gbc.gridx = 2;
+        gbc.gridy = 1;
+        CENTERpanel.add(brakeTemperature,gbc);
+
     }
 
 
@@ -190,11 +257,11 @@ public class GUI {
         setEAST();
         //frame.getContentPane().add(RPMs,BorderLayout.NORTH);
         frame.getContentPane().add(RPMsBar, BorderLayout.NORTH);
-        frame.getContentPane().add(gear, BorderLayout.WEST);
+        frame.getContentPane().add(WESTpanel, BorderLayout.WEST);
         frame.getContentPane().add(stageTime, BorderLayout.SOUTH);
-        frame.getContentPane().add(velocity, BorderLayout.CENTER);
+        frame.getContentPane().add(CENTERpanel, BorderLayout.CENTER);
         frame.getContentPane().add(EASTpanel, BorderLayout.EAST);
-
+        //frame.pack();
     }
 
     public void setupClutch() {
@@ -212,39 +279,188 @@ public class GUI {
     public void setupVelocity() {
         velocity.setHorizontalAlignment(JLabel.CENTER);
         velocity.setVerticalAlignment(JLabel.CENTER);
-        velocity.setBackground(Color.GRAY);
+        velocity.setBackground(new Color(138, 140, 136));
+        velocity.setForeground(new Color(21, 132, 0));
         velocity.setOpaque(true);
-        velocity.setPreferredSize(new Dimension(100, 100));
-        velocity.setFont(new Font("Calibri", Font.PLAIN, 60));
+        velocity.setPreferredSize(new Dimension(190, 100));
+        velocity.setMaximumSize(new Dimension(190, 100));
+        velocity.setMinimumSize(new Dimension(190, 100));
+        velocity.setFont(new Font("Calibri", Font.PLAIN, 40));
+        velocity.setBorder(BorderFactory.createLineBorder(Color.black));
     }
 
     public void setupGear() {
         gear.setHorizontalAlignment(JLabel.CENTER);
         gear.setVerticalAlignment(JLabel.CENTER);
-        gear.setBackground(Color.WHITE);
+        gear.setBackground(new Color(138, 140, 136));
         gear.setOpaque(true);
-        gear.setPreferredSize(new Dimension(100, 100));
-        gear.setFont(new Font("Calibri", Font.PLAIN, 80));
+        gearPanel.setPreferredSize(new Dimension(70, 300));
+        gearPanel.setMaximumSize(new Dimension(70, 300));
+        gearPanel.setMinimumSize(new Dimension(70, 300));
+        gear.setFont(new Font("Calibri", Font.PLAIN, 120));
+        gear.setBorder(BorderFactory.createLineBorder(Color.black));
+        gearPanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gearPanel.add(gear,gbc);
     }
 
     public void setupStageTime() {
         stageTime.setHorizontalAlignment(JLabel.CENTER);
         stageTime.setVerticalAlignment(JLabel.CENTER);
-        stageTime.setBackground(new Color(216, 216, 216));
+        stageTime.setBackground(new Color(116, 116, 116));
         stageTime.setOpaque(true);
         stageTime.setFont(new Font("Calibri", Font.PLAIN, 60));
+        stageTime.setBorder(BorderFactory.createLineBorder(Color.black));
     }
 
-    public void setupTirePressure() {
+    public void setupTireVelo() {
+        tireFR.setVerticalAlignment(JLabel.CENTER);
+        tireFR.setHorizontalAlignment(JLabel.CENTER);
+        tireFR.setFont(new Font("Calibri", Font.PLAIN, 20));
+
+        tireFL.setVerticalAlignment(JLabel.CENTER);
+        tireFL.setHorizontalAlignment(JLabel.CENTER);
+        tireFL.setFont(new Font("Calibri", Font.PLAIN, 20));
+
+        tireRR.setVerticalAlignment(JLabel.CENTER);
+        tireRR.setHorizontalAlignment(JLabel.CENTER);
+        tireRR.setFont(new Font("Calibri", Font.PLAIN, 20));
+
+        tireRL.setVerticalAlignment(JLabel.CENTER);
+        tireRL.setHorizontalAlignment(JLabel.CENTER);
+        tireRL.setFont(new Font("Calibri", Font.PLAIN, 20));
+
+        tireVelo.setLayout(new GridLayout(2, 2, 2, 2));
+        tireVelo.add(tireFL);
+        tireVelo.add(tireFR);
+        tireVelo.add(tireRL);
+        tireVelo.add(tireRR);
+        tireVelo.setPreferredSize(new Dimension(140,150));
+        tireVelo.setMaximumSize(new Dimension(140,150));
+        tireVelo.setMinimumSize(new Dimension(140,150));
+        tireVelo.setBorder(BorderFactory.createLineBorder(Color.black));
 
     }
 
     public void setupBrakeTemperature() {
+        brakeFR.setVerticalAlignment(JLabel.CENTER);
+        brakeFR.setHorizontalAlignment(JLabel.CENTER);
+        brakeFR.setFont(new Font("Calibri", Font.PLAIN, 20));
+
+        brakeFL.setVerticalAlignment(JLabel.CENTER);
+        brakeFL.setHorizontalAlignment(JLabel.CENTER);
+        brakeFL.setFont(new Font("Calibri", Font.PLAIN, 20));
+
+        brakeRR.setVerticalAlignment(JLabel.CENTER);
+        brakeRR.setHorizontalAlignment(JLabel.CENTER);
+        brakeRR.setFont(new Font("Calibri", Font.PLAIN, 20));
+
+        brakeRL.setVerticalAlignment(JLabel.CENTER);
+        brakeRL.setHorizontalAlignment(JLabel.CENTER);
+        brakeRL.setFont(new Font("Calibri", Font.PLAIN, 20));
+
+        brakeTemperature.setLayout(new GridLayout(2, 2, 2, 2));
+        brakeTemperature.add(brakeFL);
+        brakeTemperature.add(brakeFR);
+        brakeTemperature.add(brakeRL);
+        brakeTemperature.add(brakeRR);
+        brakeTemperature.setPreferredSize(new Dimension(160,150));
+        brakeTemperature.setMaximumSize(new Dimension(160,150));
+        brakeTemperature.setMinimumSize(new Dimension(160,150));
+        brakeTemperature.setBorder(BorderFactory.createLineBorder(Color.black));
 
     }
 
-    public void setupGForce() {
 
+    public void setupGForce() {
+        lateralG.setHorizontalAlignment(JLabel.CENTER);
+        lateralG.setVerticalAlignment(JLabel.CENTER);
+        lateralG.setFont(new Font("Calibri", Font.PLAIN, 20));
+
+        longitudinalG.setHorizontalAlignment(JLabel.CENTER);
+        longitudinalG.setVerticalAlignment(JLabel.CENTER);
+        longitudinalG.setFont(new Font("Calibri", Font.PLAIN, 20));
+
+        gForce.setLayout(new GridLayout(1,2,2,2));
+        gForce.add(lateralG);
+        gForce.add(longitudinalG);
+        gForce.setBackground(new Color(117, 117, 117));
+        gForce.setBorder(BorderFactory.createLineBorder(Color.black));
+        gForce.setPreferredSize(new Dimension(190, 200));
+        gForce.setMaximumSize(new Dimension(190, 200));
+        gForce.setMinimumSize(new Dimension(190, 200));
+    }
+
+    public void setupSuspension() {
+        suspFL.setMinimum(-200);
+        suspFL.setMaximum(200);
+        suspFL.setPreferredSize(new Dimension(20, 90));
+
+        suspFR.setMinimum(-200);
+        suspFR.setMaximum(200);
+        suspFR.setPreferredSize(new Dimension(20, 90));
+
+        suspRL.setMinimum(-200);
+        suspRL.setMaximum(200);
+        suspRL.setPreferredSize(new Dimension(20, 90));
+
+        suspRR.setMinimum(-200);
+        suspRR.setMaximum(200);
+        suspRR.setPreferredSize(new Dimension(20, 90));
+
+        suspensionPosition.setLayout(new GridBagLayout());
+        suspensionPosition.setBackground(Color.WHITE);
+        //suspensionPosition.setBorder(BorderFactory.createLineBorder(Color.black));
+        suspensionPosition.setAlignmentX(0);
+        suspensionPosition.setAlignmentY(0);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        suspensionPosition.add(suspFL, gbc);
+
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        suspensionPosition.add(suspFR, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        suspensionPosition.add(suspRL, gbc);
+
+        gbc.gridx = 2;
+        gbc.gridy = 2;
+        suspensionPosition.add(suspRR, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        suspensionPosition.add(suspensionFL, gbc);
+
+        gbc.gridx = 2;
+        gbc.gridy = 1;
+        suspensionPosition.add(suspensionFR, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        suspensionPosition.add(suspensionRL, gbc);
+
+        gbc.gridx = 2;
+        gbc.gridy = 3;
+        suspensionPosition.add(suspensionRR, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        suspensionPosition.add(new JLabel("       "), gbc);
+        gbc.gridy = 1;
+        suspensionPosition.add(new JLabel("       "), gbc);
+        gbc.gridy = 2;
+        suspensionPosition.add(new JLabel("       "), gbc);
+        gbc.gridy = 3;
+        suspensionPosition.add(new JLabel("       "), gbc);
     }
 
     public void setupRPMs() {
@@ -255,7 +471,7 @@ public class GUI {
         RPMs.setFont(new Font("Calibri", Font.PLAIN, 60));
     }
 
-    public void setupRPMsBar(){
+    public void setupRPMsBar() {
         RPMsBar.setUI(ui);
         RPMsBar.setStringPainted(true);
         RPMsBar.setBackground(new Color(216, 216, 216));
@@ -335,7 +551,7 @@ public class GUI {
     }
 
     public void setVelocity(int v) {
-        velocity.setText(Integer.toString(v));
+        velocity.setText(v + "\r\n KM/H");
         JComponent parent = (JComponent) velocity.getParent();
         if (parent != null) parent.revalidate();
     }
@@ -371,6 +587,38 @@ public class GUI {
 
     }
 
+    public void setSuspensionPosition(int FL, int FR, int RL, int RR) {
+        suspFL.setValue(FL);
+        suspFR.setValue(FR);
+        suspRL.setValue(RL);
+        suspRR.setValue(RR);
+
+        suspensionFL.setText(Integer.toString(FL));
+        suspensionFR.setText(Integer.toString(FR));
+        suspensionRL.setText(Integer.toString(RL));
+        suspensionRR.setText(Integer.toString(RR));
+
+    }
+
+    public void setTireVelo(int FL, int FR, int RL, int RR) {
+        tireFL.setText(Integer.toString(FL));
+        tireFR.setText(Integer.toString(FR));
+        tireRL.setText(Integer.toString(RL));
+        tireRR.setText(Integer.toString(RR));
+    }
+
+    public void setBrakeTemperature(int FL, int FR, int RL, int RR) {
+        brakeFL.setText(Integer.toString(FL));
+        brakeFR.setText(Integer.toString(FR));
+        brakeRL.setText(Integer.toString(RL));
+        brakeRR.setText(Integer.toString(RR));
+    }
+
+    public void setgForce(float latG, float longG){
+        lateralG.setText(Float.toString(latG));
+        longitudinalG.setText(Float.toString(longG));
+    }
+
     public void setDefaults() {
         setClutchBar(0);
         setBrakeBar(0);
@@ -379,6 +627,10 @@ public class GUI {
         setVelocity(0);
         setRPMs(0, 0);
         setGear(0);
+        setSuspensionPosition(0, 0, 0, 0);
+        setTireVelo(0, 0, 0, 0);
+        setBrakeTemperature(0, 0, 0, 0);
+        setgForce(0,0);
     }
 
 }
