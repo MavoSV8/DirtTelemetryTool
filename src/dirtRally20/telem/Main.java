@@ -9,12 +9,13 @@ public class Main {
         GUI gui = new GUI();
         gui.createWindow("Telemetry tool",700,400);
         gui.setDefaults();
-        boolean end = true;
-        int i = 0;
+        //boolean end = true;
+        //int i = 0;
         byte dataBuffer[];
 
 
-        while (end == true) {
+        while (true) {
+
             dataBuffer = getData.receiveData();
 
             car.setVelocity(Float.intBitsToFloat(dataBuffer[31] << 24 | (dataBuffer[30] & 0xFF) << 16 | (dataBuffer[29] & 0xFF) << 8 | (dataBuffer[28] & 0xFF)));
@@ -42,6 +43,8 @@ public class Main {
             car.setBrakeRL(Float.intBitsToFloat(dataBuffer[207] << 24 | (dataBuffer[206] & 0xFF) << 16 | (dataBuffer[205] & 0xFF) << 8 | (dataBuffer[204] & 0xFF)));
             car.setBrakeRR(Float.intBitsToFloat(dataBuffer[211] << 24 | (dataBuffer[210] & 0xFF) << 16 | (dataBuffer[209] & 0xFF) << 8 | (dataBuffer[208] & 0xFF)));
 
+            car.setLatG(Float.intBitsToFloat(dataBuffer[139] << 24 | (dataBuffer[138] & 0xFF) << 16 | (dataBuffer[137] & 0xFF) << 8 | (dataBuffer[136] & 0xFF)));
+            car.setLongG(Float.intBitsToFloat(dataBuffer[143] << 24 | (dataBuffer[142] & 0xFF) << 16 | (dataBuffer[141] & 0xFF) << 8 | (dataBuffer[140] & 0xFF)));
 
             gui.setClutchBar(car.getClutch());
             gui.setThrottleBar(car.getAccelerator());
@@ -53,11 +56,14 @@ public class Main {
             gui.setBrakeTemperature((int)car.getBrakeFL(),(int)car.getBrakeFR(),(int)car.getBrakeRL(),(int)car.getBrakeRR());
             gui.setSuspensionPosition((int)car.getSuspensionFL(),(int)car.getSuspensionFR(),(int)car.getSuspensionRL(),(int)car.getSuspensionRR());
             gui.setTireVelo((int)(car.getTiresFL()*3.6),(int)(car.getTiresFR()*3.6),(int)(car.getTiresRL()*3.6),(int)(car.getTiresRR()*3.6));
+            gui.setgForce(car.getLatG(),car.getLongG());
            /* if (input.nextInt() == 1) {
                 end = false;
             }*/
+
         }
-        getData.close();
+        //TODO change while condition to get to this statement (add window listener)
+        //getData.close();
 
     }
 }

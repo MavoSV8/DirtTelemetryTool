@@ -10,19 +10,29 @@ public class Car {
     private float accelerator;
     private float brake;
 
-    private float suspensionFL;
-    private float suspensionFR;
-    private float suspensionRL;
-    private float suspensionRR;
+    private float longG,latG;
 
-    private float brakeFL;
-    private float brakeFR;
-    private float brakeRL;
-    private float brakeRR;
+    private float suspensionFL,suspensionFR,suspensionRL,suspensionRR;
 
-    private float tiresFL;
-    private float tiresFR;
-    private float tiresRL;
+    private float brakeFL,brakeFR,brakeRL,brakeRR;
+
+    private float tiresFL,tiresFR,tiresRL;
+
+    public float getLongG() {
+        return longG;
+    }
+
+    public void setLongG(float longG) {
+        this.longG = longG;
+    }
+
+    public float getLatG() {
+        return latG;
+    }
+
+    public void setLatG(float latG) {
+        this.latG = latG;
+    }
 
     public float getSuspensionFL() {
         return suspensionFL;

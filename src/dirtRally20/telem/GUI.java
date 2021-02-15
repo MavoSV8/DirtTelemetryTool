@@ -125,6 +125,7 @@ public class GUI {
     private JPanel WESTpanel = new JPanel();
     private JPanel SOUTHpanel = new JPanel();
     private JPanel gearPanel = new JPanel();
+
     private JPanel gForce = new JPanel();
     private JPanel suspensionPosition = new JPanel();
     private JPanel tireVelo = new JPanel();
@@ -134,6 +135,7 @@ public class GUI {
     private JProgressBar clutchBar = new JProgressBar(SwingConstants.VERTICAL);
     private JProgressBar brakeBar = new JProgressBar(SwingConstants.VERTICAL);
     private JProgressBar throttleBar = new JProgressBar(SwingConstants.VERTICAL);
+
     private JProgressBar suspFL = new JProgressBar(SwingConstants.VERTICAL);
     private JProgressBar suspFR = new JProgressBar(SwingConstants.VERTICAL);
     private JProgressBar suspRL = new JProgressBar(SwingConstants.VERTICAL);
@@ -141,6 +143,7 @@ public class GUI {
 
     private int minute = 0;
     private float seconds = 0;
+    private int status;
 
     private Point mouseDownCompCoords;
 
@@ -184,6 +187,7 @@ public class GUI {
     }
 
     public void setWEST() {
+        setupSuspension();
         WESTpanel.setPreferredSize(new Dimension(100, 300));
         WESTpanel.setMaximumSize(new Dimension(100, 300));
         WESTpanel.setMinimumSize(new Dimension(100, 300));
@@ -214,7 +218,7 @@ public class GUI {
         setupBrakeTemperature();
         setupVelocity();
         setupGear();
-        setupSuspension();
+
         CENTERpanel.setPreferredSize(new Dimension(400, 300));
         CENTERpanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -285,6 +289,7 @@ public class GUI {
         });
         frame.setTitle(title);
         frame.setUndecorated(true);
+        //TODO change to hide_on_close and put getDefaultCloseOperation in while in Main
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setSize(width, height);
@@ -333,7 +338,7 @@ public class GUI {
     public void setupGear() {
         gear.setHorizontalAlignment(JLabel.CENTER);
         gear.setVerticalAlignment(JLabel.CENTER);
-        gear.setBackground(new Color(138, 140, 136));
+        gear.setBackground(new Color(117, 117, 117));
         gear.setOpaque(true);
         gearPanel.setPreferredSize(new Dimension(70, 300));
         gearPanel.setMaximumSize(new Dimension(70, 300));
@@ -445,24 +450,28 @@ public class GUI {
         suspFL.setPreferredSize(new Dimension(20, 90));
         suspFL.setMaximumSize(new Dimension(20, 90));
         suspFL.setMinimumSize(new Dimension(20, 90));
+        suspFL.setForeground(Color.YELLOW);
 
         suspFR.setMinimum(-200);
         suspFR.setMaximum(200);
         suspFR.setPreferredSize(new Dimension(20, 90));
         suspFR.setMaximumSize(new Dimension(20, 90));
         suspFR.setMinimumSize(new Dimension(20, 90));
+        suspFR.setForeground(Color.YELLOW);
 
         suspRL.setMinimum(-200);
         suspRL.setMaximum(200);
         suspRL.setPreferredSize(new Dimension(20, 90));
         suspRL.setMaximumSize(new Dimension(20, 90));
         suspRL.setMinimumSize(new Dimension(20, 90));
+        suspRL.setForeground(Color.YELLOW);
 
         suspRR.setMinimum(-200);
         suspRR.setMaximum(200);
         suspRR.setPreferredSize(new Dimension(20, 90));
         suspRR.setMaximumSize(new Dimension(20, 90));
         suspRR.setMinimumSize(new Dimension(20, 90));
+        suspRR.setForeground(Color.YELLOW);
 
         suspensionFL.setPreferredSize(new Dimension(30, 20));
         suspensionFL.setMaximumSize(new Dimension(30, 20));
@@ -489,7 +498,7 @@ public class GUI {
         suspensionRR.setHorizontalAlignment(JLabel.CENTER);
 
         suspensionPosition.setLayout(new GridBagLayout());
-        suspensionPosition.setBackground(new Color(117, 117, 117));
+        suspensionPosition.setBackground(new Color(138, 140, 136));
         //suspensionPosition.setBorder(BorderFactory.createLineBorder(Color.black));
         suspensionPosition.setAlignmentX(0);
         suspensionPosition.setAlignmentY(0);
@@ -690,8 +699,13 @@ public class GUI {
     }
 
     public void setgForce(float latG, float longG){
-        lateralG.setText(Float.toString(latG));
-        longitudinalG.setText(Float.toString(longG));
+        DecimalFormatSymbols symbol = new DecimalFormatSymbols();
+        symbol.setDecimalSeparator('.');
+        DecimalFormat df = new DecimalFormat("0.0");
+        df.setDecimalFormatSymbols(symbol);
+
+        lateralG.setText(df.format(latG) + "G");
+        longitudinalG.setText(df.format(longG) + "G");
     }
 
     public void setDefaults() {
@@ -706,6 +720,11 @@ public class GUI {
         setTireVelo(0, 0, 0, 0);
         setBrakeTemperature(0, 0, 0, 0);
         setgForce(0,0);
+    }
+
+    public int getFrameStatus(){
+        status = frame.getDefaultCloseOperation();
+        return status;
     }
 
 }
