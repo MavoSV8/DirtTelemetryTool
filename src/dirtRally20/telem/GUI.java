@@ -217,7 +217,7 @@ public class GUI {
         setupTireVelo();
         setupBrakeTemperature();
         setupVelocity();
-        setupGear();
+        setupGear(new Dimension(70, 300),120,new Color(117, 117, 117));
 
         CENTERpanel.setPreferredSize(new Dimension(400, 300));
         CENTERpanel.setLayout(new GridBagLayout());
@@ -335,16 +335,18 @@ public class GUI {
         velocity.setBorder(BorderFactory.createLineBorder(Color.black));
     }
 
-    public void setupGear() {
+
+    public void setupGear(Dimension panelDim, int fontSize, Color color) {
         gear.setHorizontalAlignment(JLabel.CENTER);
         gear.setVerticalAlignment(JLabel.CENTER);
-        gear.setBackground(new Color(117, 117, 117));
+        gear.setBackground(color);
         gear.setOpaque(true);
-        gearPanel.setPreferredSize(new Dimension(70, 300));
-        gearPanel.setMaximumSize(new Dimension(70, 300));
-        gearPanel.setMinimumSize(new Dimension(70, 300));
-        gear.setFont(new Font("Calibri", Font.PLAIN, 120));
+        gear.setFont(new Font("Calibri", Font.PLAIN, fontSize));
         gear.setBorder(BorderFactory.createLineBorder(Color.black));
+
+        gearPanel.setPreferredSize(panelDim);
+        gearPanel.setMaximumSize(panelDim);
+        gearPanel.setMinimumSize(panelDim);
         gearPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.weightx = 1;
@@ -364,22 +366,19 @@ public class GUI {
         stageTime.setBorder(BorderFactory.createLineBorder(Color.black));
     }
 
+    public void setupTire(JLabel label, int Valign,int Halign,Font font){
+        label.setVerticalAlignment(Valign);
+        label.setHorizontalAlignment(Halign);
+        label.setFont(font);
+
+    }
+
     public void setupTireVelo() {
-        tireFR.setVerticalAlignment(JLabel.CENTER);
-        tireFR.setHorizontalAlignment(JLabel.CENTER);
-        tireFR.setFont(new Font("Calibri", Font.PLAIN, 20));
 
-        tireFL.setVerticalAlignment(JLabel.CENTER);
-        tireFL.setHorizontalAlignment(JLabel.CENTER);
-        tireFL.setFont(new Font("Calibri", Font.PLAIN, 20));
-
-        tireRR.setVerticalAlignment(JLabel.CENTER);
-        tireRR.setHorizontalAlignment(JLabel.CENTER);
-        tireRR.setFont(new Font("Calibri", Font.PLAIN, 20));
-
-        tireRL.setVerticalAlignment(JLabel.CENTER);
-        tireRL.setHorizontalAlignment(JLabel.CENTER);
-        tireRL.setFont(new Font("Calibri", Font.PLAIN, 20));
+        setupTire(tireFL,JLabel.CENTER,JLabel.CENTER,new Font("Calibri", Font.PLAIN, 20));
+        setupTire(tireFR,JLabel.CENTER,JLabel.CENTER,new Font("Calibri", Font.PLAIN, 20));
+        setupTire(tireRL,JLabel.CENTER,JLabel.CENTER,new Font("Calibri", Font.PLAIN, 20));
+        setupTire(tireRR,JLabel.CENTER,JLabel.CENTER,new Font("Calibri", Font.PLAIN, 20));
 
         tireVelo.setLayout(new GridLayout(2, 2, 2, 2));
         tireVelo.add(tireFL);
@@ -394,22 +393,18 @@ public class GUI {
 
     }
 
+    public void setupBrake(JLabel label,int Valign, int Halign,Font font){
+        label.setVerticalAlignment(Valign);
+        label.setHorizontalAlignment(Halign);
+        label.setFont(font);
+    }
+
     public void setupBrakeTemperature() {
-        brakeFR.setVerticalAlignment(JLabel.CENTER);
-        brakeFR.setHorizontalAlignment(JLabel.CENTER);
-        brakeFR.setFont(new Font("Calibri", Font.PLAIN, 20));
 
-        brakeFL.setVerticalAlignment(JLabel.CENTER);
-        brakeFL.setHorizontalAlignment(JLabel.CENTER);
-        brakeFL.setFont(new Font("Calibri", Font.PLAIN, 20));
-
-        brakeRR.setVerticalAlignment(JLabel.CENTER);
-        brakeRR.setHorizontalAlignment(JLabel.CENTER);
-        brakeRR.setFont(new Font("Calibri", Font.PLAIN, 20));
-
-        brakeRL.setVerticalAlignment(JLabel.CENTER);
-        brakeRL.setHorizontalAlignment(JLabel.CENTER);
-        brakeRL.setFont(new Font("Calibri", Font.PLAIN, 20));
+        setupBrake(brakeFL,JLabel.CENTER,JLabel.CENTER,new Font("Calibri", Font.PLAIN, 20));
+        setupBrake(brakeFR,JLabel.CENTER,JLabel.CENTER,new Font("Calibri", Font.PLAIN, 20));
+        setupBrake(brakeRL,JLabel.CENTER,JLabel.CENTER,new Font("Calibri", Font.PLAIN, 20));
+        setupBrake(brakeRR,JLabel.CENTER,JLabel.CENTER,new Font("Calibri", Font.PLAIN, 20));
 
         brakeTemperature.setLayout(new GridLayout(2, 2, 2, 2));
         brakeTemperature.add(brakeFL);
@@ -444,58 +439,34 @@ public class GUI {
         gForce.setMinimumSize(new Dimension(190, 200));
     }
 
+    public void setupSuspensionBar(JProgressBar bar, int min, int max, Dimension dim, Color color) {
+        bar.setMinimum(min);
+        bar.setMaximum(max);
+        bar.setPreferredSize(dim);
+        bar.setMaximumSize(dim);
+        bar.setMinimumSize(dim);
+        bar.setForeground(color);
+
+    }
+    public void setupSuspensionLabel(JLabel label,Dimension dim,int Valign,int Halign){
+        label.setPreferredSize(dim);
+        label.setMaximumSize(dim);
+        label.setMinimumSize(dim);
+        label.setVerticalAlignment(Valign);
+        label.setHorizontalAlignment(Halign);
+    }
+
     public void setupSuspension() {
-        suspFL.setMinimum(-200);
-        suspFL.setMaximum(200);
-        suspFL.setPreferredSize(new Dimension(20, 90));
-        suspFL.setMaximumSize(new Dimension(20, 90));
-        suspFL.setMinimumSize(new Dimension(20, 90));
-        suspFL.setForeground(Color.YELLOW);
-
-        suspFR.setMinimum(-200);
-        suspFR.setMaximum(200);
-        suspFR.setPreferredSize(new Dimension(20, 90));
-        suspFR.setMaximumSize(new Dimension(20, 90));
-        suspFR.setMinimumSize(new Dimension(20, 90));
-        suspFR.setForeground(Color.YELLOW);
-
-        suspRL.setMinimum(-200);
-        suspRL.setMaximum(200);
-        suspRL.setPreferredSize(new Dimension(20, 90));
-        suspRL.setMaximumSize(new Dimension(20, 90));
-        suspRL.setMinimumSize(new Dimension(20, 90));
-        suspRL.setForeground(Color.YELLOW);
-
-        suspRR.setMinimum(-200);
-        suspRR.setMaximum(200);
-        suspRR.setPreferredSize(new Dimension(20, 90));
-        suspRR.setMaximumSize(new Dimension(20, 90));
-        suspRR.setMinimumSize(new Dimension(20, 90));
-        suspRR.setForeground(Color.YELLOW);
-
-        suspensionFL.setPreferredSize(new Dimension(30, 20));
-        suspensionFL.setMaximumSize(new Dimension(30, 20));
-        suspensionFL.setMinimumSize(new Dimension(30, 20));
-        suspensionFL.setVerticalAlignment(JLabel.CENTER);
-        suspensionFL.setHorizontalAlignment(JLabel.CENTER);
-
-        suspensionFR.setPreferredSize(new Dimension(30, 20));
-        suspensionFR.setMaximumSize(new Dimension(30, 20));
-        suspensionFR.setMinimumSize(new Dimension(30, 20));
-        suspensionFR.setVerticalAlignment(JLabel.CENTER);
-        suspensionFR.setHorizontalAlignment(JLabel.CENTER);
-
-        suspensionRL.setPreferredSize(new Dimension(30, 20));
-        suspensionRL.setMaximumSize(new Dimension(30, 20));
-        suspensionRL.setMinimumSize(new Dimension(30, 20));
-        suspensionRL.setVerticalAlignment(JLabel.CENTER);
-        suspensionRL.setHorizontalAlignment(JLabel.CENTER);
-
-        suspensionRR.setPreferredSize(new Dimension(30, 20));
-        suspensionRR.setMaximumSize(new Dimension(30, 20));
-        suspensionRR.setMinimumSize(new Dimension(30, 20));
-        suspensionRR.setVerticalAlignment(JLabel.CENTER);
-        suspensionRR.setHorizontalAlignment(JLabel.CENTER);
+        //setup suspension bars
+        setupSuspensionBar(suspFL,-200,200,new Dimension(20,90),Color.YELLOW);
+        setupSuspensionBar(suspFR,-200,200,new Dimension(20,90),Color.YELLOW);
+        setupSuspensionBar(suspRL,-200,200,new Dimension(20,90),Color.YELLOW);
+        setupSuspensionBar(suspRR,-200,200,new Dimension(20,90),Color.YELLOW);
+        //setup suspension labels
+        setupSuspensionLabel(suspensionFL,new Dimension(30, 20),JLabel.CENTER,JLabel.CENTER);
+        setupSuspensionLabel(suspensionFR,new Dimension(30, 20),JLabel.CENTER,JLabel.CENTER);
+        setupSuspensionLabel(suspensionRL,new Dimension(30, 20),JLabel.CENTER,JLabel.CENTER);
+        setupSuspensionLabel(suspensionRR,new Dimension(30, 20),JLabel.CENTER,JLabel.CENTER);
 
         suspensionPosition.setLayout(new GridBagLayout());
         suspensionPosition.setBackground(new Color(138, 140, 136));

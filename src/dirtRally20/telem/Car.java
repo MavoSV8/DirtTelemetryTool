@@ -16,7 +16,7 @@ public class Car {
 
     private float brakeFL,brakeFR,brakeRL,brakeRR;
 
-    private float tiresFL,tiresFR,tiresRL;
+    private float tiresFL,tiresFR,tiresRL,tiresRR;
 
     public float getLongG() {
         return longG;
@@ -130,12 +130,6 @@ public class Car {
         this.tiresRR = tiresRR;
     }
 
-    private float tiresRR;
-
-
-
-
-
     public float getAccelerator() {
         return accelerator;
     }
@@ -168,9 +162,6 @@ public class Car {
         this.maxRPM = maxRPM;
     }
 
-
-
-
     public float getStageTime() {
         return stageTime;
     }
@@ -178,8 +169,6 @@ public class Car {
     public void setStageTime(float stageTime) {
         this.stageTime = stageTime;
     }
-
-
 
     public void setGear(float gear) {
         this.gear = gear;
